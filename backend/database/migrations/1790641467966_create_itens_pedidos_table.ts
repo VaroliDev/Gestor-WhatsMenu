@@ -29,7 +29,7 @@ export default class extends BaseSchema {
         .onDelete('CASCADE')
         .notNullable()
 
-      table.integer('quantidade').notNullable()
+      table.integer('quantidade').notNullable().unsigned().defaultTo(1)
       table.decimal('preco_unitario', 10, 2).notNullable()
       table.decimal('preco_total', 10, 2).notNullable()
       

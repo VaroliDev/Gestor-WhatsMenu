@@ -2,13 +2,12 @@ import router from '@adonisjs/core/services/router'
 import { controllers } from '#generated/controllers'
 
 /*----------------------------------------
-Criação do grupo de rotas (CLIENTES)
+  Criação do grupo de rotas (CLIENTES)
 ----------------------------------------*/
 
 router
   .group(() => {
-    router.get('/', () => 'Route cliente funcionando')
-    router.post('/cadastrar', [controllers.Clientes, 'cadastrar'])
+    router.post('/cadastrar', [controllers.Clientes, 'cadastrarCliente'])
     router.get('/listar', [controllers.Clientes, 'listarClientes'])
     router.get('/listar/:id', [controllers.Clientes, 'listarCliente'])
     router.put('/editar', [controllers.Clientes, 'editarCliente'])
@@ -16,8 +15,24 @@ router
   })
   .prefix('/clientes')
 
+
 /*----------------------------------------
-Criação do grupo de rotas (PEDIDOS)
+  Criação do grupo de rotas (PRODUTOS)
+----------------------------------------*/
+
+router
+  .group(() => {
+    router.post('/cadastrar', [controllers.Produtos, 'cadastrarProduto'])
+    router.get('/listar', [controllers.Produtos, 'listarProdutos'])
+    router.get('/listar/:id', [controllers.Produtos, 'listarProduto'])
+    router.put('/editar', [controllers.Produtos, 'editarProduto'])
+    router.delete('/deletar/:id', [controllers.Produtos, 'deletarProduto'])
+  })
+  .prefix('/produtos')
+
+
+/*----------------------------------------
+  Criação do grupo de rotas (PEDIDOS)
 ----------------------------------------*/
 
 router
@@ -25,13 +40,3 @@ router
 
   })
   .prefix('/pedidos')
-
-/*----------------------------------------
-Criação do grupo de rotas (PRODUTOS)
-----------------------------------------*/
-
-router
-  .group(() => {
-
-  })
-  .prefix('/produtos')

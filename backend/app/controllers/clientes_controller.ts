@@ -4,9 +4,9 @@ import Cliente from '#models/cliente'
 
 export default class ClientesController {
 
-    async cadastrar({ request, response }: HttpContext) {
+    async cadastrarCliente({ request, response }: HttpContext) {
 
-        // solicita nome e telefone
+        // adquire nome e telefone
         const dados = request.only(['nome', 'telefone'])
 
         // valida se os dados foram preenchidos
@@ -36,7 +36,7 @@ export default class ClientesController {
 
     async listarCliente({ params, response }: HttpContext){
 
-        // solicita o id do cliente
+        // adquire o id do cliente
         const id_cliente = params.id
 
         // busca o cliente no banco de dados
@@ -53,7 +53,7 @@ export default class ClientesController {
 
     async editarCliente({ request, response }: HttpContext){
 
-        // solicita o id, nome e telefone para edição do cliente
+        // adquire o id, nome e telefone para edição do cliente
         const dados_cliente = request.only(['id', 'nome', 'telefone'])
 
         // busca o cliente no banco de dados
@@ -82,7 +82,7 @@ export default class ClientesController {
 
     async deletarCliente({ params, response }: HttpContext){
 
-        //  solicita o id do cliente
+        //  adquire o id do cliente
         const id_cliente = params.id
 
         // busca o cliente no banco de dados
