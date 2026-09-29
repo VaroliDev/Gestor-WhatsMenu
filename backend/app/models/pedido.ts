@@ -1,6 +1,6 @@
 import { PedidoSchema } from '#database/schema'
 import { belongsTo, hasMany } from '@adonisjs/lucid/orm'
-import type { BelongsTo, Has, HasMany } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import Cliente from '#models/cliente'
 import Itenspedido from '#models/itens_pedido'
 
