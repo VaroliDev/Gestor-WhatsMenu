@@ -99,6 +99,7 @@ export default class PedidosController {
 
     async listarPedidos({ response }: HttpContext){
 
+        // busca todos os pedidos existentes
         const pedidos = await Pedido.query()
             .preload('clientes')
             .preload('itensPedido', (query) => {
@@ -106,8 +107,8 @@ export default class PedidosController {
             })
             .orderBy('criadoEm', 'desc')
 
+        // retorna os pedidos
         return response.status(200).json(pedidos)
-
     }
 
     async buscarPedido({ params, response }: HttpContext){
@@ -115,6 +116,7 @@ export default class PedidosController {
         // adquire o id do pedido
         const id_pedido = params.id
 
+        // realiza a busca do pedido pelo id
         const pedido = await Pedido.query()
             .where('id', id_pedido)
             .preload('clientes')
@@ -122,47 +124,52 @@ export default class PedidosController {
                 query.preload('produtos')
             })
             .first()
-
+        
+        // verifica a existencia do pedido
         if (!pedido) {
             return response.status(404).json({ erro: 'Pedido não encontrado no banco de dados'})
         }
 
+        // retorna o pedido buscado
         return response.status(200).json({pedido})
     }
 
     async alterarStatus({ params, request, response }: HttpContext){
 
-        //
+        // adquire o id do pedido para procura
         const id_pedido = params.id
 
-        //
+        // adquire o status a ser atualizado
         const { status } = request.only([ 'status' ])
         
-        //
+        // array de status permitidos para alteração
         const statusPermitidos = ['pendente', 'em preparação', 'pronto', 'finalizado', 'cancelado']
 
-        //
+        // faz a verificação do status informado, verificando se ele é permitido
         if (!statusPermitidos.includes(status)){
             return response.status(400).json({ erro: 'Status invalido'})
         }
 
-        //
+        // faz a busca do pedido pelo id
         const pedido = await Pedido.query()
             .where('id', id_pedido)
             .first()
 
-        //
+        // verifica a existencia do pedido
         if (!pedido) {
             return response.status(404).json({ erro: 'Pedido não encontrado no banco de dados'})
         }
 
+        // impede a alteração do status do pedido caso ele ja esteja cancelado ou finalizado
         if(pedido.status === 'cancelado' || pedido.status === 'finalizado') {
             return response.status(400).json({ erro: 'Não é possivel alterar o status de um pedido finalizado ou cancelado'})
         }
 
+        // atualiza e salva o novo status do pedido
         pedido.status = status
         await pedido.save()
 
+        // retorna o pedido salvo com o novo status
         return response.status(200).json(pedido)
     }
 }

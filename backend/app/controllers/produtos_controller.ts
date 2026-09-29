@@ -1,5 +1,4 @@
 import type { HttpContext } from '@adonisjs/core/http'
-
 import Produto from '#models/produto'
 
 export default class ProdutosController {
@@ -21,6 +20,7 @@ export default class ProdutosController {
         //cria o produto no banco de dados
         const produto = await Produto.create(dados)
 
+        //retornar o produto criado
         return response.status(201).json(produto)
     }
 
