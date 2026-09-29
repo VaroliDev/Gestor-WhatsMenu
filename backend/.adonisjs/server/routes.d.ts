@@ -4,17 +4,28 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
-    'clientes.teste': { paramsTuple?: []; params?: {} }
     'clientes.cadastrar': { paramsTuple?: []; params?: {} }
+    'clientes.listar_clientes': { paramsTuple?: []; params?: {} }
+    'clientes.listar_cliente': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'clientes.editar_cliente': { paramsTuple?: []; params?: {} }
+    'clientes.deletar_cliente': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
-    'clientes.teste': { paramsTuple?: []; params?: {} }
+    'clientes.listar_clientes': { paramsTuple?: []; params?: {} }
+    'clientes.listar_cliente': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   HEAD: {
-    'clientes.teste': { paramsTuple?: []; params?: {} }
+    'clientes.listar_clientes': { paramsTuple?: []; params?: {} }
+    'clientes.listar_cliente': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   POST: {
     'clientes.cadastrar': { paramsTuple?: []; params?: {} }
+  }
+  PUT: {
+    'clientes.editar_cliente': { paramsTuple?: []; params?: {} }
+  }
+  DELETE: {
+    'clientes.deletar_cliente': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {
