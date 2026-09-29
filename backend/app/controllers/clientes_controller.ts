@@ -19,8 +19,9 @@ export default class ClientesController {
         }
 
         // cria o cliente no banco de dados
-
         const cliente = await Cliente.create(dados)
+
+        // retorna os dados cadastrados
         return response.status(201).json(cliente)
     }
 
