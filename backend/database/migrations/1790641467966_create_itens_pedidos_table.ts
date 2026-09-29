@@ -33,8 +33,8 @@ export default class extends BaseSchema {
       table.decimal('preco_unitario', 10, 2).notNullable()
       table.decimal('preco_total', 10, 2).notNullable()
       
-      table.timestamp('criado_em', { useTz: true }).defaultTo(this.now()).notNullable()
-      table.timestamp('modificado_em', { useTz: true }).defaultTo(this.now())
+      table.timestamp('criado_em').notNullable().defaultTo(this.now())
+      table.timestamp('modificado_em').defaultTo(null)
     })
   }
 
