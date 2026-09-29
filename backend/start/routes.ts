@@ -37,6 +37,9 @@ router
 
 router
   .group(() => {
-
+    router.post('/cadastrar', [controllers.Pedidos, 'criarPedido'])
+    router.get('/listar', [controllers.Pedidos, 'listarPedidos'])
+    router.get('/listar/:id', [controllers.Pedidos, 'buscarPedido'])
+    router.put('/status/:id', [controllers.Pedidos, 'alterarStatus'])
   })
   .prefix('/pedidos')

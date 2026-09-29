@@ -72,8 +72,10 @@ export default class ProdutosController {
             produto.preco = dados.preco
         }
 
-        if (dados.ativo){
-            produto.ativo = dados.ativo
+        if (dados.ativo == false){
+            produto.ativo = false
+        } else {
+            produto.ativo = true
         }
 
         // salva as alterações do produto

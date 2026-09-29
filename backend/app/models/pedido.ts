@@ -1,5 +1,5 @@
 import { PedidoSchema } from '#database/schema'
-import { belongsTo, hasMany } from '@adonisjs/lucid/orm'
+import { belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import Cliente from '#models/cliente'
 import Itenspedido from '#models/itens_pedido'
@@ -8,7 +8,7 @@ export default class Pedido extends PedidoSchema {
 
     //Definindo relacionamento via models
     @belongsTo(() => Cliente, {
-        foreignKey: 'cliente_id'
+        foreignKey: 'clienteId'
     })
     declare clientes: BelongsTo<typeof Cliente>
 
