@@ -73,7 +73,7 @@ export default class PedidosController {
                     quantidade: item.quantidade,
                     precoUnitario: precoUnidade.toFixed(2),
                     precoTotal: valorTotalItem.toFixed(2)
-                }), { client: trx}
+                }, { client: trx})
 
                 // soma o valor total do item para o valor todal do pedido
                 valorTotalPedido += valorTotalItem

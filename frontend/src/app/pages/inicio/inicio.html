@@ -1,72 +1,68 @@
 <div class="p-8 bg-slate-100 min-h-screen">
     <h1 class="text-2xl font-bold mb-6">Inicio</h1>
 
-    <!-- Texto informando que esta carregando -->
-    <div *ngIf="carregando" class="text-center py-6">
-        Carregando...
-    </div>
+    <div class="space-y-6">
 
-    <!-- Carrega a pagina apos carregar os dados -->
-    <div *ngIf="!carregando" class="space-y-6">
-
-        <!-- Cards com informaçoes gerais -->
         <div class="w-full bg-white p-6 rounded-2xl shadow-sm flex justify-around items-center">
             <div class="text-center">
-                <div class="text-4xl font-extrabold">{{ totalPedidos }}</div>
+                <div class="text-4xl font-extrabold">{{ totalPedidos() }}</div>
                 <div class="text-sm text-gray-500 font-medium">Pedidos Feitos</div>
             </div>
             
             <div class="h-10 w-px bg-gray-200"></div>
 
             <div class="text-center">
-                <div class="text-4xl font-extrabold">{{ totalClientes }}</div>
+                <div class="text-4xl font-extrabold">{{ totalClientes() }}</div>
                 <div class="text-sm text-gray-500 font-medium">Clientes Cadastrados</div>
             </div>
 
             <div class="h-10 w-px bg-gray-200"></div>
 
             <div class="text-center">
-                <div class="text-4xl font-extrabold">{{ totalProdutos }}</div>
+                <div class="text-4xl font-extrabold">{{ totalProdutos() }}</div>
                 <div class="text-sm text-gray-500 font-medium">Produtos em catálogo</div>
             </div>
         </div>
 
-        <!-- Tabela de pedidos recentes-->
         <div class="w-full bg-white rounded-2xl p-6 shadow-sm">
             <h2 class="text-lg font-bold mb-4">Pedidos recentes</h2>
 
-            <div *ngIf="pedidosRecentes.length === 0" class="text-sm text-center">
-                Nenhum pedido cadastrado até o momento.
-            </div>
-
-            <div *ngIf="pedidosRecentes.length > 0" class="overflow-y-auto">
-                <table class="w-full text-left text-sm text-gray-600">
-                    <thead class="bg-gray-50 border-b border-gray-100 text-gray-500 font-semibold">
-                        <tr>
-                            <th class="py-4 px-4">Nome</th>
-                            <th class="py-4 px-4">Telefone</th>
-                            <th class="py-4 px-4">Itens</th>
-                            <th class="py-4 px-4 text-right">Valor total</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y-2 divide-gray-100">
-                        <tr *ngFor="let pedido of pedidosRecentes">
-                            <td class="py-4 px-4 font-medium text-black">
-                                {{ pedido.cliente.nome }}
-                            </td>
-                            <td class="py-4 px-4">
-                                {{ pedido.cliente.telefone }}
-                            </td>
-                            <td class="py-4 px-4 text-xs text-gray-500">
-                                {{ formatarResumoItens(pedido) }}
-                            </td>
-                            <td class="py-4 px-4 text-right font-semibold text-black">
-                                R$ {{ pedido.valorTotal.toFixed(2) }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            @if (pedidosRecentes().length === 0) {
+                <div class="text-sm text-center py-4 text-gray-500">
+                    Nenhum pedido cadastrado até o momento.
+                </div>
+            } @else {
+                <div class="overflow-y-auto">
+                    <table class="w-full text-left text-sm text-gray-600">
+                        <thead class="bg-gray-50 border-b border-gray-100 text-gray-500 font-semibold">
+                            <tr>
+                                <th class="py-4 px-4">Nome</th>
+                                <th class="py-4 px-4">Telefone</th>
+                                <th class="py-4 px-4">Itens</th>
+                                <th class="py-4 px-4 text-right">Valor total</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y-2 divide-gray-100">
+                            @for (pedido of pedidosRecentes(); track pedido.id) {
+                                <tr>
+                                    <td class="py-4 px-4 font-medium text-black">
+                                        {{ pedido.clientes?.nome || '-' }}
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        {{ pedido.clientes?.telefone || '-' }}
+                                    </td>
+                                    <td class="py-4 px-4 text-xs text-gray-500">
+                                        {{ formatarResumoItens(pedido) }}
+                                    </td>
+                                    <td class="py-4 px-4 text-right font-semibold text-black">
+                                        R$ {{ pedido.valorTotal }}
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
         </div>
     </div>
 </div>
