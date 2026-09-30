@@ -1,1 +1,8 @@
-<router-outlet />
+<div class="flex flex-row min-h-screen bg-slate-100">
+    <!-- side-menu sempre aparece na esquerda -->
+    <app-side-menu class="flex flex-col w-64 flex-shrink-0"></app-side-menu>
+
+    <main>
+        <router-outlet />
+    </main>
+</div>
