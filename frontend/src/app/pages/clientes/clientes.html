@@ -1,1 +1,56 @@
-<p>clientes works!</p>
+<div class="p-8 bg-slate-100 min-h-screen">
+    <h1 class="text-2xl font-bold mb-6">Clientes</h1>
+
+    <!-- Texto informando que esta carregando -->
+    <div *ngIf="carregando" class="text-center py-6">
+        Carregando...
+    </div>
+
+    <!-- Carrega a pagina apos carregar os dados -->
+    <div *ngIf="!carregando" class="space-y-6">
+
+
+        <div class="w-full bg-white p-6 rounded-2xl shadow-sm flex justify-around items-center">
+
+        </div>
+
+
+        <!-- Tabela mostrando os clientes -->
+        <div class="w-full bg-white rounded-2xl p-6 shadow-sm">
+            <h2 class="text-lg font-bold mb-4">Pedidos recentes</h2>
+
+            <div *ngIf="clientes.length === 0" class="text-sm text-center">
+                Nenhum pedido cadastrado até o momento.
+            </div>
+
+            <div *ngIf="clientes.length > 0" class="overflow-y-auto">
+                <table class="w-full text-center text-sm text-gray-600">
+                    <thead class="bg-gray-50 border-b border-gray-100 text-gray-500 font-semibold">
+                        <tr>
+                            <th class="py-4 px-4">ID</th>
+                            <th class="py-4 px-4">Nome</th>
+                            <th class="py-4 px-4">Telefone</th>
+                            <th class="py-4 px-4">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y-2 divide-gray-100">
+                        <tr *ngFor="let cliente of clientes">
+                            <td class="py-4 px-4 font-medium text-black">
+                                {{ cliente.id }}
+                            </td>
+                            <td class="py-4 px-4">
+                                {{ cliente.nome }}
+                            </td>
+                            <td class="py-4 px-4">
+                                {{ cliente.telefone }}
+                            </td>
+                            <td class="py-4 px-4">
+                                <button class="bg-blue-600 rounded w-16 h-8 text-white">EDITAR</button>
+                                <button class="ml-2 bg-red-600 rounded w-16 h-8 text-white">APAGAR</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</div>
