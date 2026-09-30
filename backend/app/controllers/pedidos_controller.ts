@@ -107,7 +107,7 @@ export default class PedidosController {
             })
             .orderBy('criadoEm', 'desc')
 
-        // retorna os pedidos
+        // retorna os todos pedidos do banco de dados
         return response.status(200).json(pedidos)
     }
 
