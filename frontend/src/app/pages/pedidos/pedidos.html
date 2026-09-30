@@ -36,6 +36,7 @@
               <tr>
                 <th class="py-4 px-4 w-30">ID do pedido</th>
                 <th class="py-4 px-4">Cliente</th>
+                <th class="py-4 px-4">Data</th>
                 <th class="py-4 px-4">Produtos</th>
                 <th class="py-4 px-4">Status</th>
                 <th class="py-4 px-4">Ações</th>
@@ -47,6 +48,7 @@
                 <tr>
                   <td class="py-4 px-4 font-bold text-black">{{ pedido.id }}</td>
                   <td class="py-4 px-4 font-medium text-black">{{ pedido.clientes?.nome || '-' }}</td>
+                  <td class="py-4 px-4 text-sm text-gray-500">{{ formatarData(pedido.criadoEm || '') }}</td>
                   <td class="py-4 px-4 text-xs text-gray-500">{{ formatarResumoItens(pedido) }}</td>
                   <td class="py-4 px-4">
                     <span

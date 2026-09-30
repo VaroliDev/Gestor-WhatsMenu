@@ -109,6 +109,14 @@ export class Pedidos implements OnInit {
       .join(', ');
   }
 
+  // formata a data no padrão pt-br
+  formatarData(data: string): string {
+  return new Date(data).toLocaleString('pt-BR', {
+    dateStyle: 'short',
+    timeStyle: 'short'
+  });
+}
+
   // define as classes dos diferentes status do pedido
   classeStatus(status: string): string {
     switch (status) {
@@ -144,6 +152,7 @@ export class Pedidos implements OnInit {
           produto,
           quantidade: 0
         }))
+        .reverse()
     );
 
     this.modalAberto.set(true);
